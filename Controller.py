@@ -4,13 +4,13 @@ from djitellopy import tello
 
 # List all devices
 # for device in hid.enumerate():
-#     print(f"0x{device['vendor_id']:04x}:0x{device['product_id']:04x} {device['product_string']}")
+#    print(f"0x{device['vendor_id']:04x}:0x{device['product_id']:04x} {device['product_string']}")
 
 drone = tello.Tello()
-drone.connect(False)
+drone.connect()
 
-gamepad = hid.device()
-gamepad.open(0x1209, 0x4f54)
+gamepad = hid.device
+gamepad.open(0x1209,0x4f54)
 gamepad.set_nonblocking(True)
 
 takeoff = False
