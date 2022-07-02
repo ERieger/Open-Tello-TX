@@ -1,5 +1,10 @@
 from inputs import get_gamepad
+from inputs import devices
 from djitellopy import tello
+
+for device in devices:
+    print(device)
+
 
 takeoff = False
 
