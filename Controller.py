@@ -3,8 +3,8 @@ import time
 from djitellopy import tello
 
 # List all devices
-# for device in hid.enumerate():
-#     print(f"0x{device['vendor_id']:04x}:0x{device['product_id']:04x} {device['product_string']}")
+for device in hid.enumerate():
+    print(f"0x{device['vendor_id']:04x}:0x{device['product_id']:04x} {device['product_string']}")
 
 drone = tello.Tello()
 drone.connect(False)
@@ -16,8 +16,9 @@ gamepad.set_nonblocking(True)
 takeoff = False
 
 def getReport():
-    global controller
+    controller = {}
     report = gamepad.read(64)
+    print(report)
     if report:
         controller = {
             "Aileron": report[3] | report[4] << 8,
@@ -33,7 +34,6 @@ def getReport():
 
 while takeoff == False:
     controller = getReport()
-    print(controller["Toggle"])
     if (controller["Toggle"] == 255):
         drone.takeoff()
         takeoff = True
