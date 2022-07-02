@@ -16,8 +16,9 @@ gamepad.set_nonblocking(True)
 takeoff = False
 
 def getReport():
-    global controller
+    controller = {}
     report = gamepad.read(64)
+    print(report)
     if report:
         controller = {
             "Aileron": report[3] | report[4] << 8,
@@ -33,7 +34,6 @@ def getReport():
 
 while takeoff == False:
     controller = getReport()
-    print(controller["Toggle"])
     if (controller["Toggle"] == 255):
         drone.takeoff()
         takeoff = True
